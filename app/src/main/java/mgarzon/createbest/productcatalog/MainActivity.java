@@ -134,9 +134,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_LONG).show();
     }
 
-    private void deleteProduct(String id) {
-
-        Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
+    private boolean deleteProduct(String id) {
+        DatabaseReference dr = FirebaseDatabase.getInstance().getReference("products").child(id);
+        dr.removeValue();
+        Toast.makeText(getApplicationContext(), "Product Deleted", Toast.LENGTH_LONG).show();
+        return true;
     }
 
     private void addProduct() {
