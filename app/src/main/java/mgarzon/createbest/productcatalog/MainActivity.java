@@ -66,6 +66,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        databaseProducts.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                products.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Product product = postSnapshot.getValue(Product.class);
+                    products.add(product);
+                }
+
+                ProductList adapter = new ProductList(MainActivity.this, products);
+                ListViewProducts.setAdapter(adapter);
+                
+             }
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+                
+            }
+        });
     }
 
 
