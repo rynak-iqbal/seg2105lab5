@@ -126,9 +126,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateProduct(String id, String name, double price) {
+   private void updateProduct(String id, String name, double price) {
 
-        Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
+        DatabaseReference dr = FirebaseDatabase.getInstance().getReference("products").child(id);
+        Product product = new Product(id, name, price);
+        dr.setValue(product);
+        Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_LONG).show();
     }
 
     private void deleteProduct(String id) {
