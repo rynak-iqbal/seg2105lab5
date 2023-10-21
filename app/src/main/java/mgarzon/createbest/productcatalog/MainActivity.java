@@ -28,11 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     List<Product> products;
 
+    DatabaseReference databaseProducts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        databaseProducts = FirebaseDatabase.getInstance().getReference("products");
+        
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPrice = (EditText) findViewById(R.id.editTextPrice);
         listViewProducts = (ListView) findViewById(R.id.listViewProducts);
