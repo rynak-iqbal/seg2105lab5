@@ -137,7 +137,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addProduct() {
-
-        Toast.makeText(this, "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
+   
+        String name = editTextName.getText().toString();
+        double price = Double.parseDouble(editTextPrice.getText().toString());
+    
+      
+        if (!TextUtils.isEmpty(name)) {
+    
+           
+            String id = databaseProducts.push().getKey();
+    
+            
+            Product product = new Product(id, name, price);
+    
+           
+            databaseProducts.child(id).setValue(product);
+    
+          
+            editTextName.setText("");
+            editTextPrice.setText("");
+    
+            
+            Toast.makeText(this, "Product added", Toast.LENGTH_LONG).show();
+        } else {
+     
+            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
+        }
     }
 }
